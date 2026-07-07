@@ -7,7 +7,7 @@ COPY pom.xml /home/app
 RUN mvn -f /home/app/pom.xml clean package -DskipTests
 
 # Stage 2: Create the runtime environment
-FROM openjdk:17-jdk-slim
+FROM eclipse-temurin:17-jdk
 COPY --from=build /home/app/target/system-0.0.1-SNAPSHOT.jar /usr/local/lib/system.jar
 EXPOSE 8080
 ENTRYPOINT ["java","-jar","/usr/local/lib/system.jar"]
